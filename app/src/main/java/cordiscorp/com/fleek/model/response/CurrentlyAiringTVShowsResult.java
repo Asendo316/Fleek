@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Ibkunle Adeoluwa on 2/20/2019.
  */
-public class NowPlayingTVShowsResult {
+public class CurrentlyAiringTVShowsResult {
     @SerializedName("poster_path")
     @Expose
     private String posterPath;

@@ -8,13 +8,13 @@ import java.util.List;
 /**
  * Created by Ibkunle Adeoluwa on 2/20/2019.
  */
-public class NowPlayingTVShowsResponse {
+public class CurrentlyAiringTVShowsResponse {
     @SerializedName("page")
     @Expose
     private Integer page;
     @SerializedName("results")
     @Expose
-    private List<NowPlayingTVShowsResult> nowPlayingTVShowsResults;
+    private List<CurrentlyAiringTVShowsResult> currentlyAiringTVShowsResults;
     @SerializedName("total_results")
     @Expose
     private Integer totalResults;
@@ -30,12 +30,12 @@ public class NowPlayingTVShowsResponse {
         this.page = page;
     }
 
-    public List<NowPlayingTVShowsResult> getNowPlayingTVShowsResults() {
-        return nowPlayingTVShowsResults;
+    public List<CurrentlyAiringTVShowsResult> getCurrentlyAiringTVShowsResults() {
+        return currentlyAiringTVShowsResults;
     }
 
-    public void setNowPlayingTVShowsResults(List<NowPlayingTVShowsResult> nowPlayingTVShowsResults) {
-        this.nowPlayingTVShowsResults = nowPlayingTVShowsResults;
+    public void setCurrentlyAiringTVShowsResults(List<CurrentlyAiringTVShowsResult> currentlyAiringTVShowsResults) {
+        this.currentlyAiringTVShowsResults = currentlyAiringTVShowsResults;
     }
 
     public Integer getTotalResults() {
