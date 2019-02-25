@@ -416,7 +416,7 @@
                             android:fontFamily="@font/wesfy_regular"
                             android:padding="6dp"
                             android:singleLine="true"
-                            android:text="Upcoming TV shows"
+                            android:text="TV shows airing today"
                             android:textSize="16dp" />
 
                         <TextView
