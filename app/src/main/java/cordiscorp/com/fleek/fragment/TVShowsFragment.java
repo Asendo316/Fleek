@@ -23,12 +23,15 @@ import java.util.List;
 
 import cordiscorp.com.fleek.BuildConfig;
 import cordiscorp.com.fleek.R;
+import cordiscorp.com.fleek.adapter.AiringTodayTVShowsAdapter;
 import cordiscorp.com.fleek.adapter.CurrentlyAiringTVShowsAdapter;
 import cordiscorp.com.fleek.adapter.PopularTVShowsAdapter;
 import cordiscorp.com.fleek.adapter.TopRatedTVShowsAdapter;
 import cordiscorp.com.fleek.connection.Client;
 import cordiscorp.com.fleek.connection.ConnectionManager;
 import cordiscorp.com.fleek.connection.Service;
+import cordiscorp.com.fleek.model.response.AiringTodayTVShowsResponse;
+import cordiscorp.com.fleek.model.response.AiringTodayTVShowsResult;
 import cordiscorp.com.fleek.model.response.CurrentlyAiringTVShowsResponse;
 import cordiscorp.com.fleek.model.response.CurrentlyAiringTVShowsResult;
 import cordiscorp.com.fleek.model.response.LatestTVShowsResponse;
@@ -138,8 +141,7 @@ public class TVShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
             swipeRefreshLayout.setRefreshing(false);
         }
     }
-
-
+    
     private void loadCurrentlyAiringTvShows() {
         if (ConnectionManager.isNetworkAvailable(getContext())) {
             try {
@@ -168,7 +170,6 @@ public class TVShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
             swipeRefreshLayout.setRefreshing(false);
         }
     }
-
 
     private void loadPopularTVShows() {
         if (ConnectionManager.isNetworkAvailable(getContext())) {
@@ -199,36 +200,35 @@ public class TVShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
         }
     }
 
-    /*
-        private void loadUpComingMovies() {
-            if (ConnectionManager.isNetworkAvailable(getContext())) {
-                try {
-                    Client Client = new Client();
-                    Service apiService =
-                            Client.getClient().create(Service.class);
-                    Call<UpcomingMovieResponse> call = apiService.getUpcomingMovies(BuildConfig.THE_MOVIE_DB_API_TOKEN);
-                    call.enqueue(new Callback<UpcomingMovieResponse>() {
-                        @Override
-                        public void onResponse(Call<UpcomingMovieResponse> call, Response<UpcomingMovieResponse> response) {
-                            Paper.book().write("upcomingMovieResponseCache", new Gson().toJson(response.body()));
-                            List<UpcomingMovie> movies = response.body().getPopularTVShowsResults();
-                            onSuccessfulLoadUpcomingMovies(movies);
-                            swipeRefreshLayout.setRefreshing(false);
-                        }
+    private void loadTvShowsAiringToday() {
+        if (ConnectionManager.isNetworkAvailable(getContext())) {
+            try {
+                Client Client = new Client();
+                Service apiService =
+                        Client.getClient().create(Service.class);
+                Call<AiringTodayTVShowsResponse> call = apiService.getTVShowsAiringToday(BuildConfig.THE_MOVIE_DB_API_TOKEN);
+                call.enqueue(new Callback<AiringTodayTVShowsResponse>() {
+                    @Override
+                    public void onResponse(Call<AiringTodayTVShowsResponse> call, Response<AiringTodayTVShowsResponse> response) {
+                        Paper.book().write("tvsShowsAiringTodayResponseCache", new Gson().toJson(response.body()));
+                        List<AiringTodayTVShowsResult> movies = response.body().getAiringTodayTVShowsResults();
+                        onSuccessfulLoadTvShowsAiringToday(movies);
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
 
-                        @Override
-                        public void onFailure(Call<UpcomingMovieResponse> call, Throwable t) {
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            } else {
-                Toast.makeText(getActivity(), "Connection Error, Check connection settings and Try Again! ", Toast.LENGTH_SHORT).show();
-                swipeRefreshLayout.setRefreshing(false);
+                    @Override
+                    public void onFailure(Call<AiringTodayTVShowsResponse> call, Throwable t) {
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+        } else {
+            Toast.makeText(getActivity(), "Connection Error, Check connection settings and Try Again! ", Toast.LENGTH_SHORT).show();
+            swipeRefreshLayout.setRefreshing(false);
         }
-    */
+    }
+
     private void loadTopRatedTVShows() {
         if (ConnectionManager.isNetworkAvailable(getContext())) {
 
@@ -284,17 +284,13 @@ public class TVShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
         }
     }
 
-    /*
-
-    private void onSuccessfulLoadUpcomingMovies(List<UpcomingMovie> movies) {
+    private void onSuccessfulLoadTvShowsAiringToday(List<AiringTodayTVShowsResult> movies) {
         if (movies != null) {
             upComingMovieRecycler.setItemAnimator(new DefaultItemAnimator());
             upComingMovieRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-            upComingMovieRecycler.setAdapter(new UpComingMoviesAdapter(getContext(), movies));
+            upComingMovieRecycler.setAdapter(new AiringTodayTVShowsAdapter(getContext(), movies));
         }
     }
-
-    */
 
     private void onSuccessfullLatestLoad(LatestTVShowsResponse movies) {
         if (movies != null) {
@@ -371,7 +367,7 @@ public class TVShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
             String topRatedTvShowsCache = Paper.book().read("topRatedTvShowsCache");
             String currentlyAiringTvShowsCache = Paper.book().read("currentlyAiringTvShowsCache");
             String popularTvShowsResponseCache = Paper.book().read("popularTvShowsResponseCache");
-            String upcomingMovieResponseCache = Paper.book().read("upcomingMovieResponseCache");
+            String tvsShowsAiringTodayResponseCache = Paper.book().read("tvsShowsAiringTodayResponseCache");
             String latestTVShowsResponseCache = Paper.book().read("latestTVShowsResponseCache");
 
 
@@ -395,14 +391,14 @@ public class TVShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
             } else {
                 loadPopularTVShows();
             }
-/*
-            if (upcomingMovieResponseCache != null && !upcomingMovieResponseCache.isEmpty() && !upcomingMovieResponseCache.equals("null")) {
-                UpcomingMovieResponse upcomingMovieResponse = new Gson().fromJson(upcomingMovieResponseCache, UpcomingMovieResponse.class);
-                onSuccessfulLoadUpcomingMovies(upcomingMovieResponse.getPopularTVShowsResults());
+
+            if (tvsShowsAiringTodayResponseCache != null && !tvsShowsAiringTodayResponseCache.isEmpty() && !tvsShowsAiringTodayResponseCache.equals("null")) {
+                AiringTodayTVShowsResponse upcomingMovieResponse = new Gson().fromJson(tvsShowsAiringTodayResponseCache, AiringTodayTVShowsResponse.class);
+                onSuccessfulLoadTvShowsAiringToday(upcomingMovieResponse.getAiringTodayTVShowsResults());
             } else {
-                loadUpComingMovies();
+                loadTvShowsAiringToday();
             }
-            */
+
 
             if (latestTVShowsResponseCache != null && !latestTVShowsResponseCache.isEmpty() && !latestTVShowsResponseCache.equals("null")) {
                 LatestTVShowsResponse latestTVShowsResponse = new Gson().fromJson(latestTVShowsResponseCache, LatestTVShowsResponse.class);
@@ -415,7 +411,7 @@ public class TVShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
             loadTopRatedTVShows();
             loadCurrentlyAiringTvShows();
             loadPopularTVShows();
-            //loadUpComingMovies();
+            loadTvShowsAiringToday();
             loadLatestTVShow();
         }
     }

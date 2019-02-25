@@ -1,5 +1,6 @@
 package cordiscorp.com.fleek.connection;
 
+import cordiscorp.com.fleek.model.response.AiringTodayTVShowsResponse;
 import cordiscorp.com.fleek.model.response.AiringTodayTVShowsResult;
 import cordiscorp.com.fleek.model.response.CurrentlyAiringTVShowsResponse;
 import cordiscorp.com.fleek.model.response.LatestMovieResponse;
@@ -60,5 +61,5 @@ public interface Service {
     Call<CurrentlyAiringTVShowsResponse>getCurrentlyAiringTVShows(@Query("api_key") String apiKey);
 
     @GET("tv/airing_today")
-    Call<AiringTodayTVShowsResult>getTVShowsAiringToday(@Query("api_key") String apiKey);
+    Call<AiringTodayTVShowsResponse>getTVShowsAiringToday(@Query("api_key") String apiKey);
 }
