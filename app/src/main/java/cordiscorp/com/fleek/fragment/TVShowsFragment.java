@@ -23,11 +23,14 @@ import java.util.List;
 
 import cordiscorp.com.fleek.BuildConfig;
 import cordiscorp.com.fleek.R;
+import cordiscorp.com.fleek.adapter.CurrentlyAiringTVShowsAdapter;
 import cordiscorp.com.fleek.adapter.PopularTVShowsAdapter;
 import cordiscorp.com.fleek.adapter.TopRatedTVShowsAdapter;
 import cordiscorp.com.fleek.connection.Client;
 import cordiscorp.com.fleek.connection.ConnectionManager;
 import cordiscorp.com.fleek.connection.Service;
+import cordiscorp.com.fleek.model.response.CurrentlyAiringTVShowsResponse;
+import cordiscorp.com.fleek.model.response.CurrentlyAiringTVShowsResult;
 import cordiscorp.com.fleek.model.response.LatestTVShowsResponse;
 import cordiscorp.com.fleek.model.response.PopularTVShowsResponse;
 import cordiscorp.com.fleek.model.response.PopularTVShowsResult;
@@ -136,25 +139,25 @@ public class TVShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
         }
     }
 
-    /*
-    private void loadNowPlayingMovies() {
+
+    private void loadCurrentlyAiringTvShows() {
         if (ConnectionManager.isNetworkAvailable(getContext())) {
             try {
                 Client Client = new Client();
                 Service apiService =
                         Client.getClient().create(Service.class);
-                Call<NowPlayingMovieResponse> call = apiService.getNowPlaying(BuildConfig.THE_MOVIE_DB_API_TOKEN);
-                call.enqueue(new Callback<NowPlayingMovieResponse>() {
+                Call<CurrentlyAiringTVShowsResponse> call = apiService.getCurrentlyAiringTVShows(BuildConfig.THE_MOVIE_DB_API_TOKEN);
+                call.enqueue(new Callback<CurrentlyAiringTVShowsResponse>() {
                     @Override
-                    public void onResponse(Call<NowPlayingMovieResponse> call, Response<NowPlayingMovieResponse> response) {
-                        Paper.book().write("nowPlayingMovieResponseCache", new Gson().toJson(response.body()));
-                        List<NowPlayingMovie> movies = response.body().getPopularTVShowsResults();
-                        onSuccessfullNowPlayingMoviesLoad(movies);
+                    public void onResponse(Call<CurrentlyAiringTVShowsResponse> call, Response<CurrentlyAiringTVShowsResponse> response) {
+                        Paper.book().write("currentlyAiringTvShowsCache", new Gson().toJson(response.body()));
+                        List<CurrentlyAiringTVShowsResult> movies = response.body().getCurrentlyAiringTVShowsResults();
+                        onSuccessfullCurentlyAiringTvShowsResponse(movies);
                         swipeRefreshLayout.setRefreshing(false);
                     }
 
                     @Override
-                    public void onFailure(Call<NowPlayingMovieResponse> call, Throwable t) {
+                    public void onFailure(Call<CurrentlyAiringTVShowsResponse> call, Throwable t) {
                     }
                 });
             } catch (Exception e) {
@@ -166,7 +169,6 @@ public class TVShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
         }
     }
 
-    */
 
     private void loadPopularTVShows() {
         if (ConnectionManager.isNetworkAvailable(getContext())) {
@@ -273,14 +275,16 @@ public class TVShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
             popularMoviesRecycler.setAdapter(new PopularTVShowsAdapter(getContext(), movies));
         }
     }
-/*
-    private void onSuccessfullNowPlayingMoviesLoad(List<NowPlayingMovie> movies) {
+
+    private void onSuccessfullCurentlyAiringTvShowsResponse(List<CurrentlyAiringTVShowsResult> movies) {
         if (movies != null) {
             nowPlayingMoviesRecycler.setItemAnimator(new DefaultItemAnimator());
             nowPlayingMoviesRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-            nowPlayingMoviesRecycler.setAdapter(new NowPlayingMoviesAdapter(getContext(), movies));
+            nowPlayingMoviesRecycler.setAdapter(new CurrentlyAiringTVShowsAdapter(getContext(), movies));
         }
     }
+
+    /*
 
     private void onSuccessfulLoadUpcomingMovies(List<UpcomingMovie> movies) {
         if (movies != null) {
@@ -365,7 +369,7 @@ public class TVShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private void updateAllMovieViews(boolean isRefreshed) {
         if (!isRefreshed) {
             String topRatedTvShowsCache = Paper.book().read("topRatedTvShowsCache");
-            String nowPlayingMovieResponseCache = Paper.book().read("nowPlayingMovieResponseCache");
+            String currentlyAiringTvShowsCache = Paper.book().read("currentlyAiringTvShowsCache");
             String popularTvShowsResponseCache = Paper.book().read("popularTvShowsResponseCache");
             String upcomingMovieResponseCache = Paper.book().read("upcomingMovieResponseCache");
             String latestTVShowsResponseCache = Paper.book().read("latestTVShowsResponseCache");
@@ -377,14 +381,14 @@ public class TVShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
             } else {
                 loadTopRatedTVShows();
             }
-/*
-            if (nowPlayingMovieResponseCache != null && !nowPlayingMovieResponseCache.isEmpty() && !nowPlayingMovieResponseCache.equals("null")) {
-                NowPlayingMovieResponse nowPlayingMovieResponse = new Gson().fromJson(nowPlayingMovieResponseCache, NowPlayingMovieResponse.class);
-                onSuccessfullNowPlayingMoviesLoad(nowPlayingMovieResponse.getPopularTVShowsResults());
+
+            if (currentlyAiringTvShowsCache != null && !currentlyAiringTvShowsCache.isEmpty() && !currentlyAiringTvShowsCache.equals("null")) {
+                CurrentlyAiringTVShowsResponse nowPlayingMovieResponse = new Gson().fromJson(currentlyAiringTvShowsCache, CurrentlyAiringTVShowsResponse.class);
+                onSuccessfullCurentlyAiringTvShowsResponse(nowPlayingMovieResponse.getCurrentlyAiringTVShowsResults());
             } else {
-                loadNowPlayingMovies();
+                loadCurrentlyAiringTvShows();
             }
-*/
+
             if (popularTvShowsResponseCache != null && !popularTvShowsResponseCache.isEmpty() && !popularTvShowsResponseCache.equals("null")) {
                 PopularTVShowsResponse popularMoviesResponse = new Gson().fromJson(popularTvShowsResponseCache, PopularTVShowsResponse.class);
                 onSuccessfullPopularTVShowsLoad(popularMoviesResponse.getPopularTVShowsResults());
@@ -409,8 +413,7 @@ public class TVShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
         } else {
             swipeRefreshLayout.setRefreshing(true);
             loadTopRatedTVShows();
-            //loadNowPlayingMovies();
-
+            loadCurrentlyAiringTvShows();
             loadPopularTVShows();
             //loadUpComingMovies();
             loadLatestTVShow();
