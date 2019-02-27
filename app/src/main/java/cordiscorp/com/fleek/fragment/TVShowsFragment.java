@@ -30,15 +30,15 @@ import cordiscorp.com.fleek.adapter.TopRatedTVShowsAdapter;
 import cordiscorp.com.fleek.connection.Client;
 import cordiscorp.com.fleek.connection.ConnectionManager;
 import cordiscorp.com.fleek.connection.Service;
-import cordiscorp.com.fleek.model.response.AiringTodayTVShowsResponse;
-import cordiscorp.com.fleek.model.response.AiringTodayTVShowsResult;
-import cordiscorp.com.fleek.model.response.CurrentlyAiringTVShowsResponse;
-import cordiscorp.com.fleek.model.response.CurrentlyAiringTVShowsResult;
-import cordiscorp.com.fleek.model.response.LatestTVShowsResponse;
-import cordiscorp.com.fleek.model.response.PopularTVShowsResponse;
-import cordiscorp.com.fleek.model.response.PopularTVShowsResult;
-import cordiscorp.com.fleek.model.response.TopRatedTVShowsResponse;
-import cordiscorp.com.fleek.model.response.TopRatedTVShowsResult;
+import cordiscorp.com.fleek.model.response.movies_response.AiringTodayTVShowsResponse;
+import cordiscorp.com.fleek.model.response.movies_response.AiringTodayTVShowsResult;
+import cordiscorp.com.fleek.model.response.movies_response.CurrentlyAiringTVShowsResponse;
+import cordiscorp.com.fleek.model.response.movies_response.CurrentlyAiringTVShowsResult;
+import cordiscorp.com.fleek.model.response.movies_response.LatestTVShowsResponse;
+import cordiscorp.com.fleek.model.response.movies_response.PopularTVShowsResponse;
+import cordiscorp.com.fleek.model.response.movies_response.PopularTVShowsResult;
+import cordiscorp.com.fleek.model.response.movies_response.TopRatedTVShowsResponse;
+import cordiscorp.com.fleek.model.response.movies_response.TopRatedTVShowsResult;
 import io.paperdb.Paper;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -141,7 +141,7 @@ public class TVShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
             swipeRefreshLayout.setRefreshing(false);
         }
     }
-    
+
     private void loadCurrentlyAiringTvShows() {
         if (ConnectionManager.isNetworkAvailable(getContext())) {
             try {

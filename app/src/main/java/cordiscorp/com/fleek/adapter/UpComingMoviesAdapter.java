@@ -14,8 +14,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import cordiscorp.com.fleek.R;
-import cordiscorp.com.fleek.model.response.Movie;
-import cordiscorp.com.fleek.model.response.UpcomingMovie;
+import cordiscorp.com.fleek.model.response.movies_response.UpcomingMovie;
 
 /**
  * Created by Ibkunle Adeoluwa on 2/19/2019.

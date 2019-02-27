@@ -14,8 +14,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import cordiscorp.com.fleek.R;
-import cordiscorp.com.fleek.model.response.AiringTodayTVShowsResult;
-import cordiscorp.com.fleek.model.response.CurrentlyAiringTVShowsResult;
+import cordiscorp.com.fleek.model.response.movies_response.AiringTodayTVShowsResult;
 
 /**
  * Created by Ibkunle Adeoluwa on 2/19/2019.

@@ -1,16 +1,15 @@
 package cordiscorp.com.fleek.connection;
 
-import cordiscorp.com.fleek.model.response.AiringTodayTVShowsResponse;
-import cordiscorp.com.fleek.model.response.AiringTodayTVShowsResult;
-import cordiscorp.com.fleek.model.response.CurrentlyAiringTVShowsResponse;
-import cordiscorp.com.fleek.model.response.LatestMovieResponse;
-import cordiscorp.com.fleek.model.response.LatestTVShowsResponse;
-import cordiscorp.com.fleek.model.response.MoviesResponse;
-import cordiscorp.com.fleek.model.response.NowPlayingMovieResponse;
-import cordiscorp.com.fleek.model.response.PopularMoviesResponse;
-import cordiscorp.com.fleek.model.response.PopularTVShowsResponse;
-import cordiscorp.com.fleek.model.response.TopRatedTVShowsResponse;
-import cordiscorp.com.fleek.model.response.UpcomingMovieResponse;
+import cordiscorp.com.fleek.model.response.movies_response.AiringTodayTVShowsResponse;
+import cordiscorp.com.fleek.model.response.movies_response.CurrentlyAiringTVShowsResponse;
+import cordiscorp.com.fleek.model.response.movies_response.LatestMovieResponse;
+import cordiscorp.com.fleek.model.response.movies_response.LatestTVShowsResponse;
+import cordiscorp.com.fleek.model.response.movies_response.MoviesResponse;
+import cordiscorp.com.fleek.model.response.movies_response.NowPlayingMovieResponse;
+import cordiscorp.com.fleek.model.response.movies_response.PopularMoviesResponse;
+import cordiscorp.com.fleek.model.response.movies_response.PopularTVShowsResponse;
+import cordiscorp.com.fleek.model.response.movies_response.TopRatedTVShowsResponse;
+import cordiscorp.com.fleek.model.response.movies_response.UpcomingMovieResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
