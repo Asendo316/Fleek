@@ -19,6 +19,7 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import cordiscorp.com.fleek.R;
 import cordiscorp.com.fleek.fragment.HomeFragment;
+import cordiscorp.com.fleek.fragment.MusicFragment;
 import cordiscorp.com.fleek.fragment.TVShowsFragment;
 import cordiscorp.com.fleek.pandora.NavigationManager;
 
@@ -131,6 +132,9 @@ public class HomeActivity extends AppCompatActivity
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
                         transaction.replace(R.id.content, new TVShowsFragment()).commit();
+                        return true;
+                    case R.id.navigation_dashboard:
+                        transaction.replace(R.id.content, new MusicFragment()).commit();
                         return true;
                 }
                 return false;

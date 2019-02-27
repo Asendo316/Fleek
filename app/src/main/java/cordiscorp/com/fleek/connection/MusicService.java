@@ -1,7 +1,9 @@
 package cordiscorp.com.fleek.connection;
 
+import cordiscorp.com.fleek.model.response.music_response.TopArtistGeoResponse;
 import cordiscorp.com.fleek.model.response.music_response.TopArtistResponse;
 import cordiscorp.com.fleek.model.response.music_response.TopTagsResponse;
+import cordiscorp.com.fleek.model.response.music_response.TopTracksGeoResponse;
 import cordiscorp.com.fleek.model.response.music_response.TopTracksResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -23,4 +25,13 @@ public interface MusicService {
     //http://ws.audioscrobbler.com/2.0/?method=chart.gettoptags&api_key=5b610dead62582230a50f45f4a3a50d1&format=json
     @GET("/2.0")
     Call<TopTagsResponse> getTopTags(@Query("method") String method, @Query("api_key") String apiKey, @Query("format") String format);
+
+    //http://ws.audioscrobbler.com/2.0/?method=geo.gettoptracks&country=nigeria&api_key=5b610dead62582230a50f45f4a3a50d1&format=json
+    @GET("/2.0")
+    Call<TopTracksGeoResponse> getTopTracksGeo(@Query("method") String method, @Query("country") String country, @Query("api_key") String apiKey, @Query("format") String format);
+
+    //http://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=spain&api_key=5b610dead62582230a50f45f4a3a50d1&format=json
+    @GET("/2.0")
+    Call<TopArtistGeoResponse> getTopArtistsGeo(@Query("method") String method, @Query("country") String country, @Query("api_key") String apiKey, @Query("format") String format);
+
 }
