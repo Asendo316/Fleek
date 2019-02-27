@@ -6,8 +6,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by Ibkunle Adeoluwa on 2/18/2019.
  */
-public class Client {
-    public static final String BASE_URL = "https://api.themoviedb.org/3/";
+public class MusicClient {
+    public static final String BASE_URL = "http://ws.audioscrobbler.com";
     public static Retrofit retrofit = null;
 
     public static Retrofit getClient() {

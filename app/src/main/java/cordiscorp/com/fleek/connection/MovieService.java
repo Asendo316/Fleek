@@ -17,7 +17,7 @@ import retrofit2.http.Query;
 /**
  * Created by Ibkunle Adeoluwa on 2/19/2019.
  */
-public interface Service {
+public interface MovieService {
 
     /**
      * Movies URLS

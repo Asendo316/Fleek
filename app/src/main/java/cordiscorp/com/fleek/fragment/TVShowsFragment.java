@@ -27,9 +27,9 @@ import cordiscorp.com.fleek.adapter.AiringTodayTVShowsAdapter;
 import cordiscorp.com.fleek.adapter.CurrentlyAiringTVShowsAdapter;
 import cordiscorp.com.fleek.adapter.PopularTVShowsAdapter;
 import cordiscorp.com.fleek.adapter.TopRatedTVShowsAdapter;
-import cordiscorp.com.fleek.connection.Client;
+import cordiscorp.com.fleek.connection.MovieClient;
 import cordiscorp.com.fleek.connection.ConnectionManager;
-import cordiscorp.com.fleek.connection.Service;
+import cordiscorp.com.fleek.connection.MovieService;
 import cordiscorp.com.fleek.model.response.movies_response.AiringTodayTVShowsResponse;
 import cordiscorp.com.fleek.model.response.movies_response.AiringTodayTVShowsResult;
 import cordiscorp.com.fleek.model.response.movies_response.CurrentlyAiringTVShowsResponse;
@@ -116,9 +116,9 @@ public class TVShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private void loadLatestTVShow() {
         if (ConnectionManager.isNetworkAvailable(getContext())) {
             try {
-                Client Client = new Client();
-                Service apiService =
-                        Client.getClient().create(Service.class);
+                MovieClient Client = new MovieClient();
+                MovieService apiService =
+                        Client.getClient().create(MovieService.class);
                 Call<LatestTVShowsResponse> call = apiService.getLatestTVShows(BuildConfig.THE_MOVIE_DB_API_TOKEN);
                 call.enqueue(new Callback<LatestTVShowsResponse>() {
                     @Override
@@ -145,9 +145,9 @@ public class TVShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private void loadCurrentlyAiringTvShows() {
         if (ConnectionManager.isNetworkAvailable(getContext())) {
             try {
-                Client Client = new Client();
-                Service apiService =
-                        Client.getClient().create(Service.class);
+                MovieClient Client = new MovieClient();
+                MovieService apiService =
+                        Client.getClient().create(MovieService.class);
                 Call<CurrentlyAiringTVShowsResponse> call = apiService.getCurrentlyAiringTVShows(BuildConfig.THE_MOVIE_DB_API_TOKEN);
                 call.enqueue(new Callback<CurrentlyAiringTVShowsResponse>() {
                     @Override
@@ -174,9 +174,9 @@ public class TVShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private void loadPopularTVShows() {
         if (ConnectionManager.isNetworkAvailable(getContext())) {
             try {
-                Client Client = new Client();
-                Service apiService =
-                        Client.getClient().create(Service.class);
+                MovieClient Client = new MovieClient();
+                MovieService apiService =
+                        Client.getClient().create(MovieService.class);
                 Call<PopularTVShowsResponse> call = apiService.getPopularTVShows(BuildConfig.THE_MOVIE_DB_API_TOKEN);
                 call.enqueue(new Callback<PopularTVShowsResponse>() {
                     @Override
@@ -203,9 +203,9 @@ public class TVShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private void loadTvShowsAiringToday() {
         if (ConnectionManager.isNetworkAvailable(getContext())) {
             try {
-                Client Client = new Client();
-                Service apiService =
-                        Client.getClient().create(Service.class);
+                MovieClient Client = new MovieClient();
+                MovieService apiService =
+                        Client.getClient().create(MovieService.class);
                 Call<AiringTodayTVShowsResponse> call = apiService.getTVShowsAiringToday(BuildConfig.THE_MOVIE_DB_API_TOKEN);
                 call.enqueue(new Callback<AiringTodayTVShowsResponse>() {
                     @Override
@@ -233,9 +233,9 @@ public class TVShowsFragment extends Fragment implements SwipeRefreshLayout.OnRe
         if (ConnectionManager.isNetworkAvailable(getContext())) {
 
             try {
-                Client Client = new Client();
-                Service apiService =
-                        Client.getClient().create(Service.class);
+                MovieClient Client = new MovieClient();
+                MovieService apiService =
+                        Client.getClient().create(MovieService.class);
                 Call<TopRatedTVShowsResponse> call = apiService.getTopRatedTVShows(BuildConfig.THE_MOVIE_DB_API_TOKEN);
                 call.enqueue(new Callback<TopRatedTVShowsResponse>() {
                     @Override
