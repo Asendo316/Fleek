@@ -9,13 +9,13 @@ import com.google.gson.annotations.SerializedName;
 public class TopTracksResponse {
     @SerializedName("tracks")
     @Expose
-    private TopTrackTracks tracks;
+    private TopTracksTracks tracks;
 
-    public TopTrackTracks getTracks() {
+    public TopTracksTracks getTracks() {
         return tracks;
     }
 
-    public void setTracks(TopTrackTracks tracks) {
+    public void setTracks(TopTracksTracks tracks) {
         this.tracks = tracks;
     }
 

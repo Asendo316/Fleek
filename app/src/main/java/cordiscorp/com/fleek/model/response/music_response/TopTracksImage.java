@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by Ibkunle Adeoluwa on 2/27/2019.
  */
-public class TopTrackImage {
+public class TopTracksImage {
 
     @SerializedName("#text")
     @Expose

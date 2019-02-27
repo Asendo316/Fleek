@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Ibkunle Adeoluwa on 2/27/2019.
  */
 
-public class TopTrackTrack {
+public class TopTracksTrack {
 
     @SerializedName("name")
     @Expose
@@ -34,10 +34,10 @@ public class TopTrackTrack {
     private TopTrackStreamable streamable;
     @SerializedName("artist")
     @Expose
-    private TopTacksArtist artist;
+    private TopTracksArtist artist;
     @SerializedName("image")
     @Expose
-    private List<TopTrackImage> image = null;
+    private List<TopTracksImage> image = null;
 
     public String getName() {
         return name;
@@ -95,19 +95,19 @@ public class TopTrackTrack {
         this.streamable = streamable;
     }
 
-    public TopTacksArtist getArtist() {
+    public TopTracksArtist getArtist() {
         return artist;
     }
 
-    public void setArtist(TopTacksArtist artist) {
+    public void setArtist(TopTracksArtist artist) {
         this.artist = artist;
     }
 
-    public List<TopTrackImage> getImage() {
+    public List<TopTracksImage> getImage() {
         return image;
     }
 
-    public void setImage(List<TopTrackImage> image) {
+    public void setImage(List<TopTracksImage> image) {
         this.image = image;
     }
 

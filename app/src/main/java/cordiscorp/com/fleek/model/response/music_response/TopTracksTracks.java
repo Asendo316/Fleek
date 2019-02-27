@@ -8,20 +8,20 @@ import java.util.List;
 /**
  * Created by Ibkunle Adeoluwa on 2/27/2019.
  */
-public class TopTrackTracks {
+public class TopTracksTracks {
 
     @SerializedName("track")
     @Expose
-    private List<TopTrackTrack> track = null;
+    private List<TopTracksTrack> track = null;
     @SerializedName("@attr")
     @Expose
     private TopTrackAttr attr;
 
-    public List<TopTrackTrack> getTrack() {
+    public List<TopTracksTrack> getTrack() {
         return track;
     }
 
-    public void setTrack(List<TopTrackTrack> track) {
+    public void setTrack(List<TopTracksTrack> track) {
         this.track = track;
     }
 

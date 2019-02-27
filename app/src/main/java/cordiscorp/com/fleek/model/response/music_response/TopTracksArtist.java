@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by Ibkunle Adeoluwa on 2/27/2019.
  */
-public class TopTacksArtist {
+public class TopTracksArtist {
 
     @SerializedName("name")
     @Expose
